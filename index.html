@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+    <title>Tugas 2|Ali</title>
+</head>
+<body>
+    <div class="container">
+        <div class="row row justify-content-center pt-4">
+            <div class="col-md-6 col-lg-6">
+                <div class="card w-100">
+                    <div class="card-body">        
+                        <h5 class="card-title text-center">Data Mahasiswa</h5>
+                        <form action="" id="dataForm">
+
+                            <div class="form-floating mb-3">
+                                <input type="text" class="form-control" id="nama" placeholder="" required>
+                                <label for="matkul">Nama</label>
+                            </div>
+                            <div class="form-floating">
+                                <input type="text" class="form-control" id="matkul" placeholder="" required>
+                                <label for="matkul">Mata Kuliah</label>
+                            </div>
+                            <div class="input-group my-3">
+                                <label class="input-group-text" for="nilai">Grade</label>
+                            <select class="form-select" id="nilai">
+                              <option value="">Pilih Nilai</option>
+                              <option value="A">A</option>
+                              <option value="B">B</option>
+                              <option value="C">C</option>
+                              <option value="D">D</option>
+                              <option value="E">E</option>
+                            </select>
+                        </div>
+                        <button class="btn btn-success" type="submit">Hitung</button>
+                    </form>
+                    </div>
+                </div>
+                <div class="card w-100 mt-3">
+                    <div class="card-body">
+                        <table class="table" id="hasil">
+                            <tr>
+                              <th>Nama</th>
+                              <th>Mata Kuliah</th>
+                              <th>Grade</th>
+                              <th>Nilai Rata-rata</th>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.7.0.js" integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM=" crossorigin="anonymous"></script>
+
+    <script>
+        $(document).ready(function () {
+          $("#dataForm").submit(function (event) {
+            event.preventDefault();
+      
+            const gradeValues = { A: 4, B: 3, C: 2, D: 1, E: 0 };
+            const name = $("#nama").val();
+            const course = $("#matkul").val();
+            const selectedGrade = $("#nilai").val();
+      
+            if (selectedGrade in gradeValues) {
+              const gradeValue = gradeValues[selectedGrade];
+              const gradePoint = (gradeValue / 1).toFixed(2);
+      
+              // Membuat objek baris baru untuk tabel
+              const newRow = document.createElement("tr");
+      
+              // Membuat dan mengisi sel-sel dalam baris
+              const nameCell = document.createElement("td");
+              nameCell.textContent = name;
+              newRow.appendChild(nameCell);
+      
+              const courseCell = document.createElement("td");
+              courseCell.textContent = course;
+              newRow.appendChild(courseCell);
+      
+              const selectedGradeCell = document.createElement("td");
+              selectedGradeCell.textContent = selectedGrade;
+              newRow.appendChild(selectedGradeCell);
+      
+              const gradePointCell = document.createElement("td");
+              gradePointCell.textContent = gradePoint;
+              newRow.appendChild(gradePointCell);
+      
+              // Menambahkan baris ke dalam tabel
+              $("#hasil").append(newRow);
+
+              $("#nama").val("");
+              $("#matkul").val("");
+              $("#nilai").val("");
+            }
+          });
+        });
+      </script>
+</body>
+</html>
